@@ -18,7 +18,7 @@ export const model: IModel = {
                 {
                     name: 'RadioSelectComponent',
                     props: {
-                        identifier: 'drive',
+                        identifier: 'version',
                         items: [
                             { title: 'Model 3', description: 'Range(EPA est.): 272mi, 0-60: 5.8sec', value: 'model3' },
                             { title: 'Model 3 Long Range', description: 'Range(EPA est.): 333mi, 0-60: 4.2sec', value: 'model3lr' },
@@ -45,12 +45,12 @@ export const model: IModel = {
                     props: {
                         identifier: 'autopilot',
                         optionOne: {
-                            value: 'enhanced',
+                            value: 'full',
                             title: 'Full Self-Driving Capability',
                             recomennded: true
                         },
                         optionTwo: {
-                            value: 'basic',
+                            value: 'enhanced',
                             title: 'Enhanced Autopilot',
                         }
                     }

@@ -27,7 +27,6 @@ export const usePartnerConfigStore = defineStore('Parner Store', () => {
         return data;
     };
 
-
     return {
         loadPartnerData,
         partnerData

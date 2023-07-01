@@ -1,0 +1,1 @@
+export const modelLoader = (product: string, language: string) => import(`@/models/${product}/${product}.${language}.ts`);

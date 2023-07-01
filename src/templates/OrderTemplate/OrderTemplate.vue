@@ -17,11 +17,14 @@ defineProps<IProps>();
   <div class="h-full w-full overflow-hidden flex p-4 gap-x-4 bg-white">
     <div class="w-full px-5">
       <div class="h-full max-w-[500px] mx-auto flex flex-col">
-        <img
-          class="w-28 h-auto mb-5"
-          :src="partnerStore.partnerData.logo.url"
-          :alt="partnerStore.partnerData.logo.alt"
-        />
+        <div class="flex justify-between">
+          <img
+            class="w-28 h-auto mb-5"
+            :src="partnerStore.partnerData.logo.url"
+            :alt="partnerStore.partnerData.logo.alt"
+          />
+          <span class="mt-4 font-semibold text-gray-600">$47,500</span>
+        </div>
         <VProgressBar :progress="progress" />
         <div class="flex-1 pt-14">
           <slot>Here will be a content</slot>

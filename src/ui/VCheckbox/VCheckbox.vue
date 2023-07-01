@@ -16,6 +16,7 @@ const emit = defineEmits<{
       class="appearance-none mr-2 bg-transparent h-5 w-5 border-2 border-primary-600 rounded-md cursor-pointer checked:bg-primary-600 transition-colors checked:bg-checkbox-icon bg-center bg-cover"
       :id="id"
       type="checkbox"
+      :checked="modelValue"
       @input="(e) => emit('update:modelValue',
     (e.target as HTMLInputElement).checked)"
     />
