@@ -8,6 +8,7 @@ export const partnersService = {
             const json = await req.json();
             return json.data as IPartnerData;
         } catch (error) {
+            console.log(error)
             return undefined;
         }
 

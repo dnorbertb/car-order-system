@@ -21,6 +21,7 @@ export const orderService = {
             const json = await req.json();
             return json.data as IOrderData;
         } catch (error) {
+            console.log(error)
             return undefined;
         }
 
@@ -31,6 +32,7 @@ export const orderService = {
             const json = await req.json();
             return json.data as IOrderData;
         } catch (error) {
+            console.log(error)
             return undefined;
         }
     },
