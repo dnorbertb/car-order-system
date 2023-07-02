@@ -45,12 +45,12 @@ export const model: IModel = {
                     props: {
                         identifier: 'autopilot',
                         optionOne: {
-                            value: 'full',
+                            value: 'autopilotFull',
                             title: 'Full Self-Driving Capability',
                             recomennded: true
                         },
                         optionTwo: {
-                            value: 'enhanced',
+                            value: 'autopilotEnhanced',
                             title: 'Enhanced Autopilot',
                         }
                     }
@@ -96,13 +96,13 @@ export const model: IModel = {
                 {
                     name: 'ColorSelectComponent',
                     props: {
-                        identifier: 'paint-color',
+                        identifier: 'paintColor',
                         items: [
-                            { name: 'white', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_White.png' },
-                            { name: 'gray', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_MidnightSilver.png' },
-                            { name: 'blue', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Blue.png' },
-                            { name: 'black', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Black.png' },
-                            { name: 'red', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Red.png' }
+                            { name: 'paintColorWhite', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_White.png' },
+                            { name: 'paintColorGray', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_MidnightSilver.png' },
+                            { name: 'paintColorBlue', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Blue.png' },
+                            { name: 'paintColorBlack', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Black.png' },
+                            { name: 'paintColorRed', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Paint_Red.png' }
                         ]
                     }
                 },
@@ -123,10 +123,10 @@ export const model: IModel = {
                 {
                     name: 'ColorSelectComponent',
                     props: {
-                        identifier: 'interior-color',
+                        identifier: 'interiorColor',
                         items: [
-                            { name: 'white', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Interior_White.png' },
-                            { name: 'black', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Interior_Black.png' },
+                            { name: 'interiorColorWhite', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Interior_White.png' },
+                            { name: 'interiorColorBlack', href: 'https://digitalassets.tesla.com/image/upload/f_auto,q_auto/prod/coin/static_assets/MODEL3/UI/Interior_Black.png' },
                         ]
                     }
                 },
@@ -149,9 +149,9 @@ export const model: IModel = {
                     props: {
                         identifier: 'accessories',
                         items: [
-                            { title: 'Wall Connector', value: 'WallConector' },
-                            { title: 'Mobile Connector', value: 'MobileConector' },
-                            { title: 'Floor mats', value: 'FloorMats' },
+                            { title: 'Wall Connector', value: 'accessoriesWallConector' },
+                            { title: 'Mobile Connector', value: 'accessoriesMobileConector' },
+                            { title: 'Floor mats', value: 'accessoriesFloorMats' },
                         ]
                     }
                 }

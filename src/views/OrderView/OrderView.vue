@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // Template
 import OrderTemplate from '@/templates/OrderTemplate/OrderTemplate.vue';
+import VIcon from '@/ui/VIcon/VIcon.vue';
 
 // App
 import { onMounted, ref } from 'vue';
@@ -17,18 +18,20 @@ import { useSubscribers } from './core/useSubscribers';
 import { useProcessRoutingStore } from './core/processRoutingStore';
 
 // Composables
-// import { useProcessDataStorageHandling } from './core/processDataStorageHandling';
+import { useProcessDataHandling } from './core/processDataHandling';
+import { mdiLoading } from '@mdi/js';
 
 // Logic
 const { subscribe, callSubscribers, cleanSubscribers } = useSubscribers();
-// const { saveProcessData, restoreProcessData, initializeDataLocalStorage } =
-// useProcessDataStorageHandling();
+const { saveProcessData, restoreProcessData, initializeOrderMonitoring } =
+  useProcessDataHandling();
 const processRoutingStore = useProcessRoutingStore();
 const form = ref<InstanceType<typeof HTMLFormElement>>();
 const route = useRoute();
 const router = useRouter();
 const processStore = useProcessConfigStore();
 const validation = useVuelidate();
+const isLoading = ref(true);
 
 const pageSubmitHandler = () => {
   validation.value.$validate();
@@ -37,7 +40,7 @@ const pageSubmitHandler = () => {
   processRoutingStore.goForward();
   const cartId = route.query.cart as string;
   if (!cartId) return;
-  // saveProcessData(cartId);
+  saveProcessData();
 };
 
 const backButtonHandler = () => {
@@ -47,7 +50,7 @@ const backButtonHandler = () => {
   processRoutingStore.goBack();
   const cartId = route.query.cart as string;
   if (!cartId) return;
-  // saveProcessData(cartId);
+  saveProcessData();
   return;
 };
 
@@ -65,12 +68,13 @@ onMounted(async () => {
   const controller = await controllerLoader();
   await processStore.fetchConfig(controller.loader);
   processRoutingStore.startRouting(controller);
-  // const cartId = route.query.cart as string;
-  // if (cartId) {
-  //   restoreProcessData(cartId);
-  // } else {
-  //   initializeDataLocalStorage();
-  // }
+  const cartId = route.query.cart as string;
+  if (cartId) {
+    restoreProcessData();
+  } else {
+    initializeOrderMonitoring();
+  }
+  isLoading.value = false;
 });
 </script>
 <template>
@@ -81,6 +85,7 @@ onMounted(async () => {
     :back-button-handler="backButtonHandler"
   >
     <form
+      v-if="!isLoading"
       class="flex flex-col gap-y-4"
       ref="form"
       @submit.prevent="pageSubmitHandler"
@@ -94,5 +99,11 @@ onMounted(async () => {
         @subscribe="subscribe"
       />
     </form>
+    <div v-else class="w-full h-full flex items-center justify-center">
+      <VIcon
+        class="w-16 h-16 fill-primary-700 animate-spin mb-20"
+        :path="mdiLoading"
+      />
+    </div>
   </OrderTemplate>
 </template>

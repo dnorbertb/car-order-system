@@ -38,8 +38,8 @@ const validation = useVuelidate(
 <template>
   <div class="flex flex-col gap-y-3">
     <VRadioSelect
-      v-for="(item, i) in items"
-      :key="'item' + i"
+      v-for="item in items"
+      :key="'item' + item.value"
       v-bind="item"
       v-model="model"
       :active="model === item.value"

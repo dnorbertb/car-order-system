@@ -11,4 +11,7 @@ export interface IPartnerData {
         s: number
         l: number
     },
+    pricing: {
+        products: Array<{ id: string, name: string, pricing: number }>;
+    }
 }

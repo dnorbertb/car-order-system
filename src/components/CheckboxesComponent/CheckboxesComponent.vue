@@ -13,7 +13,7 @@ defineProps<IProps>();
     <OrderCheckbox
       v-for="item in items"
       :label="item.title"
-      :identifier="identifier + item.value"
+      :identifier="item.value"
     />
   </div>
 </template>

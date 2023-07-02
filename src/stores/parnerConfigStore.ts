@@ -4,7 +4,7 @@ import type { IPartnerData } from '@/types/IPartner';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const usePartnerConfigStore = defineStore('Parner Store', () => {
+export const usePartnerConfigStore = defineStore('Partner Store', () => {
 
     const partnerData = ref<IPartnerData>({
         id: 0,
@@ -18,6 +18,9 @@ export const usePartnerConfigStore = defineStore('Parner Store', () => {
             h: 24,
             s: 100,
             l: 50
+        },
+        pricing: {
+            products: []
         }
     });
 

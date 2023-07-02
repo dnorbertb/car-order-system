@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useCartStore } from '@/stores/cartStore';
 import { usePartnerConfigStore } from '@/stores/parnerConfigStore';
 import VButton from '@/ui/VButton/VButton.vue';
 import VProgressBar from '@/ui/VProgressBar/VProgressBar.vue';
 const partnerStore = usePartnerConfigStore();
+const cartStore = useCartStore();
 
 interface IProps {
   progress: number;
@@ -23,7 +25,9 @@ defineProps<IProps>();
             :src="partnerStore.partnerData.logo.url"
             :alt="partnerStore.partnerData.logo.alt"
           />
-          <span class="mt-4 font-semibold text-gray-600">$47,500</span>
+          <span class="mt-4 font-semibold text-gray-600"
+            >${{ cartStore.summaryPrice }}</span
+          >
         </div>
         <VProgressBar :progress="progress" />
         <div class="flex-1 pt-14">
