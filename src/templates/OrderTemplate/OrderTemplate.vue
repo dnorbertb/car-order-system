@@ -55,7 +55,7 @@ defineProps<IProps>();
       </div>
     </div>
     <div
-      class="flex items-center h-full p-4 w-[500px] shrink-0 bg-white shadow border border-gray-200 rounded-3xl"
+      class="hidden lg:flex items-center h-full p-4 w-[500px] shrink-0 bg-white shadow border border-gray-200 rounded-3xl"
     >
       <img
         class="transition-opacity animate-show w-full h-auto mb-40"
