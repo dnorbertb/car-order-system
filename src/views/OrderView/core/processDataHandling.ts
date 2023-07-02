@@ -31,10 +31,6 @@ export const useProcessDataHandling = (modalRef: Ref<InstanceType<typeof Abandon
         orderStore.orderData = processData.orderData;
         router.push({
             name: 'OrderView',
-            params: {
-                product: processData.car,
-                language: processData.language
-            },
             query: route.query
         });
     }
@@ -97,7 +93,7 @@ const getCookie = (name: string) => {
     const cookies = document.cookie.split(';');
     const cookieString = cookies.find(i => i.includes(name));
     if (!cookieString) return undefined;
-    return cookieString.slice(name.length + 1);
+    return cookieString.slice(name.length + 2);
 }
 
 const createProcessCookie = (id: string, timeout: number) => {
