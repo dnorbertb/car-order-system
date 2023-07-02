@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface IProps {
-  type: 'button' | 'submit' | 'reset';
-  variant: IButtonVariant;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: IButtonVariant;
 }
 withDefaults(defineProps<IProps>(), { type: 'button', variant: 'primary' });
 

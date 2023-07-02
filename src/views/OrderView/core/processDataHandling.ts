@@ -1,9 +1,12 @@
 import { useRoute, useRouter } from "vue-router"
 import { useOrderStore } from "@/stores/orderDataStore";
 import { orderService } from "@/services/orderService";
-import { toRaw } from "vue";
+import { toRaw, type Ref } from "vue";
+import type AbandonedCartModal from '../AbandonedCartModal.vue';
 
-export const useProcessDataHandling = () => {
+
+export const useProcessDataHandling = (modalRef: Ref<InstanceType<typeof AbandonedCartModal> | undefined>) => {
+    const orderTimeout = 172800000;
     const route = useRoute();
     const router = useRouter();
     const { product, language } = route.params as { product: string, language: string };
@@ -21,7 +24,7 @@ export const useProcessDataHandling = () => {
         const cartId = route.query.cart as string;
         const processData = await orderService.get(cartId)
         if (!processData) {
-            initializeOrderMonitoring();
+            createNewProcess();
             return;
         };
         orderStore.orderData = processData.orderData;
@@ -35,19 +38,47 @@ export const useProcessDataHandling = () => {
         });
     }
 
-    const initializeOrderMonitoring = async () => {
-        const cartId = route.query.cart as string;
-        if (!product) throw new
-            Error('Product is not defined, cart cant be activated')
+    const createNewProcess = async () => {
+        const newOrder = await orderService.add({
+            car: product,
+            language: language,
+            orderData: {},
+        });
+        router.push({ query: { cart: newOrder.id } });
+        createProcessCookie(newOrder.id, orderTimeout);
+    }
 
-        if (!cartId) {
-            const newOrder = await orderService.add({
-                car: product,
-                language: language,
-                orderData: {},
-            });
-            router.push({ query: { cart: newOrder.id } });
+    const getProcessIdFromCookies = () => {
+        const cartIdFromCookie = getCookie('cartId');
+        if (!cartIdFromCookie) return undefined;
+        return cartIdFromCookie;
+    }
+
+    const initializeOrderMonitoring = async () => {
+        if (!product) throw new
+            Error('Product is not defined, cart cant be activated');
+
+        const cartId = route.query.cart as string;
+        if (cartId) {
+            restoreProcessData();
+            return;
         }
+
+        const abandonedId = getProcessIdFromCookies();
+        if (!abandonedId) {
+            createNewProcess();
+            return;
+        }
+
+        const userWantsToContinue = await modalRef.value?.getUserDecision()
+        if (!userWantsToContinue) {
+            createNewProcess();
+            return;
+        }
+
+        await router.push({ query: { cart: abandonedId } });
+        restoreProcessData();
+        return;
     }
 
     return {
@@ -55,4 +86,17 @@ export const useProcessDataHandling = () => {
         saveProcessData,
         restoreProcessData,
     }
+}
+
+
+const getCookie = (name: string) => {
+    const cookies = document.cookie.split(';');
+    const cookieString = cookies.find(i => i.includes(name));
+    if (!cookieString) return undefined;
+    return cookieString.slice(name.length + 2);
+}
+
+const createProcessCookie = (id: string, timeout: number) => {
+    const expirationDate = new Date(new Date().getTime() + timeout).toUTCString();
+    document.cookie = `cartId=${id};expires=${expirationDate};path=/`;
 }

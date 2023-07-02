@@ -2,6 +2,7 @@
 // Template
 import OrderTemplate from '@/templates/OrderTemplate/OrderTemplate.vue';
 import VIcon from '@/ui/VIcon/VIcon.vue';
+import AbandonedCartModal from './AbandonedCartModal.vue';
 
 // App
 import { onMounted, ref } from 'vue';
@@ -22,11 +23,12 @@ import { useProcessDataHandling } from './core/processDataHandling';
 import { mdiLoading } from '@mdi/js';
 
 // Logic
-const { subscribe, callSubscribers, cleanSubscribers } = useSubscribers();
-const { saveProcessData, restoreProcessData, initializeOrderMonitoring } =
-  useProcessDataHandling();
-const processRoutingStore = useProcessRoutingStore();
 const form = ref<InstanceType<typeof HTMLFormElement>>();
+const modal = ref<InstanceType<typeof AbandonedCartModal>>();
+const { subscribe, callSubscribers, cleanSubscribers } = useSubscribers();
+const { saveProcessData, initializeOrderMonitoring } =
+  useProcessDataHandling(modal);
+const processRoutingStore = useProcessRoutingStore();
 const route = useRoute();
 const router = useRouter();
 const processStore = useProcessConfigStore();
@@ -68,12 +70,7 @@ onMounted(async () => {
   const controller = await controllerLoader();
   await processStore.fetchConfig(controller.loader);
   processRoutingStore.startRouting(controller);
-  const cartId = route.query.cart as string;
-  if (cartId) {
-    restoreProcessData();
-  } else {
-    initializeOrderMonitoring();
-  }
+  await initializeOrderMonitoring();
   isLoading.value = false;
 });
 </script>
@@ -105,5 +102,6 @@ onMounted(async () => {
         :path="mdiLoading"
       />
     </div>
+    <AbandonedCartModal ref="modal" />
   </OrderTemplate>
 </template>
