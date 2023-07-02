@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { BACKEND_URL } from '@/env';
 import { useCartStore } from '@/stores/cartStore';
 import { usePartnerConfigStore } from '@/stores/parnerConfigStore';
 import VButton from '@/ui/VButton/VButton.vue';
@@ -54,9 +55,13 @@ defineProps<IProps>();
       </div>
     </div>
     <div
-      class="h-full p-4 w-[500px] shrink-0 bg-white shadow border border-gray-200 rounded-3xl"
+      class="flex items-center h-full p-4 w-[500px] shrink-0 bg-white shadow border border-gray-200 rounded-3xl"
     >
-      Car image
+      <img
+        class="transition-opacity animate-show w-full h-auto mb-40"
+        :src="BACKEND_URL + '/public/model3.png'"
+        alt="Car image"
+      />
     </div>
   </div>
 </template>

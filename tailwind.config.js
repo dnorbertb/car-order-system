@@ -23,6 +23,15 @@ module.exports = {
         'checkbox-icon':
           "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTksMjAuNDJMMi43OSwxNC4yMUw1LjYyLDExLjM4TDksMTQuNzdMMTguODgsNC44OEwyMS43MSw3LjcxTDksMjAuNDJaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==');",
       },
+      keyframes: {
+        show: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
+      animation: {
+        show: 'show 1s ease-in-out',
+      },
     },
   },
   plugins: [],
