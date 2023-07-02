@@ -30,7 +30,6 @@ export const useProcessDataHandling = (modalRef: Ref<InstanceType<typeof Abandon
         };
         orderStore.orderData = processData.orderData;
         router.push({
-            name: 'OrderView',
             query: route.query
         });
     }
