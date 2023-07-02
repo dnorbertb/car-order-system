@@ -97,7 +97,7 @@ const getCookie = (name: string) => {
     const cookies = document.cookie.split(';');
     const cookieString = cookies.find(i => i.includes(name));
     if (!cookieString) return undefined;
-    return cookieString.slice(name.length + 2);
+    return cookieString.slice(name.length + 1);
 }
 
 const createProcessCookie = (id: string, timeout: number) => {
