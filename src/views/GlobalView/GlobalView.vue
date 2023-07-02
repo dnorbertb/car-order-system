@@ -13,7 +13,10 @@ onMounted(async () => {
     brand: string;
   };
   const parnerData = await parnerStore.loadPartnerData(brand);
-  if (!parnerData) router.push({ name: 'NotFoundView' });
+  if (!parnerData) {
+    router.push({ name: 'NotFoundView' });
+    return;
+  }
   setColorPalette(parnerData.accent_color);
   isLoading.value = false;
 });

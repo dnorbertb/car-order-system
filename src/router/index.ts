@@ -5,6 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'MainRoute',
       redirect: '/en/tesla/model3/'
     },
     {
@@ -21,6 +22,11 @@ const router = createRouter({
           path: 'summary',
           name: 'SummaryView',
           component: () => import('@/views/SummaryView/SummaryView.vue')
+        },
+        {
+          path: 'thank-you',
+          name: 'ThankYouView',
+          component: () => import('@/views/ThankYouView/ThankYouView.vue')
         }
       ]
     },

@@ -40,9 +40,8 @@ const pageSubmitHandler = () => {
   if (validation.value.$error) return;
   callSubscribers('next');
   processRoutingStore.goForward();
-  const cartId = route.query.cart as string;
-  if (!cartId) return;
   saveProcessData();
+  return;
 };
 
 const backButtonHandler = () => {
@@ -50,8 +49,6 @@ const backButtonHandler = () => {
   if (validation.value.$error) return;
   callSubscribers('back');
   processRoutingStore.goBack();
-  const cartId = route.query.cart as string;
-  if (!cartId) return;
   saveProcessData();
   return;
 };

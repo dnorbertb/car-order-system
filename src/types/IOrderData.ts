@@ -1,8 +1,6 @@
+import type { ICartData } from "./ICartData";
+
 export interface IOrderData {
-    id: string,
-    car: string,
-    language: string,
-    createDate: number,
-    updateDate: number,
-    orderData: Record<string, string | number | boolean>
+    cart: ICartData,
+    paymentSuccessfull: boolean
 }

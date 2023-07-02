@@ -26,6 +26,7 @@ export const usePartnerConfigStore = defineStore('Partner Store', () => {
 
     const loadPartnerData = async (partnerName: string) => {
         const data = await partnersService.get(partnerName);
+        if (!data) return;
         partnerData.value = data;
         return data;
     };

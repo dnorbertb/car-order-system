@@ -1,6 +1,6 @@
 import { useRoute, useRouter } from "vue-router"
 import { useOrderStore } from "@/stores/orderDataStore";
-import { orderService } from "@/services/orderService";
+import { cartService } from "@/services/cartService";
 import { toRaw, type Ref } from "vue";
 import type AbandonedCartModal from '../AbandonedCartModal.vue';
 
@@ -14,7 +14,8 @@ export const useProcessDataHandling = (modalRef: Ref<InstanceType<typeof Abandon
 
     const saveProcessData = () => {
         const cartId = route.query.cart as string;
-        orderService.update({
+        if (!cartId) return;
+        cartService.update({
             id: cartId,
             orderData: toRaw(orderStore.orderData),
         });
@@ -22,7 +23,7 @@ export const useProcessDataHandling = (modalRef: Ref<InstanceType<typeof Abandon
 
     const restoreProcessData = async () => {
         const cartId = route.query.cart as string;
-        const processData = await orderService.get(cartId)
+        const processData = await cartService.get(cartId)
         if (!processData) {
             createNewProcess();
             return;
@@ -39,11 +40,14 @@ export const useProcessDataHandling = (modalRef: Ref<InstanceType<typeof Abandon
     }
 
     const createNewProcess = async () => {
-        const newOrder = await orderService.add({
+        const newOrder = await cartService.add({
             car: product,
             language: language,
             orderData: {},
         });
+
+        if (!newOrder) return;
+        /// HERE SHOULD BE SOME ANOTHER HANDLING
         router.push({ query: { cart: newOrder.id } });
         createProcessCookie(newOrder.id, orderTimeout);
     }
