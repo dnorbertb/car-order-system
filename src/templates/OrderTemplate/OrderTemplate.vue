@@ -17,12 +17,12 @@ interface IProps {
 defineProps<IProps>();
 </script>
 <template>
-  <div class="h-full w-full overflow-hidden flex p-4 gap-x-4 bg-white">
-    <div class="w-full px-5">
-      <div class="h-full max-w-[500px] mx-auto flex flex-col">
-        <div class="flex justify-between">
+  <div class="h-full w-full overflow-hidden flex gap-x-4 bg-white">
+    <div class="w-full px-1 md:px-5 overflow-hidden">
+      <div class="h-full max-w-[500px] mx-auto flex flex-col overflow-hidden">
+        <div class="flex justify-between px-3 md:px-5 md:pt-5">
           <img
-            class="w-28 h-auto mb-5"
+            class="w-28 h-auto mb-1 md:mb-5"
             :src="partnerStore.partnerData.logo.url"
             :alt="partnerStore.partnerData.logo.alt"
           />
@@ -30,11 +30,13 @@ defineProps<IProps>();
             >${{ cartStore.summaryPrice }}</span
           >
         </div>
-        <VProgressBar :progress="progress" />
-        <div class="flex-1 pt-14">
+        <VProgressBar class="px-3 md:px-5" :progress="progress" />
+        <div
+          class="flex-1 pt-4 md:pt-14 pb-4 overflow-x-hidden overflow-y-auto"
+        >
           <slot>Here will be a content</slot>
         </div>
-        <div class="flex justify-between py-4">
+        <div class="flex justify-between py-4 border-t border-t-gray-200">
           <VButton
             v-if="!hideBackButton"
             @click="backButtonHandler"
@@ -54,14 +56,16 @@ defineProps<IProps>();
         </div>
       </div>
     </div>
-    <div
-      class="hidden lg:flex items-center h-full p-4 w-[500px] shrink-0 bg-white shadow border border-gray-200 rounded-3xl"
-    >
-      <img
-        class="transition-opacity animate-show w-full h-auto mb-40"
-        :src="BACKEND_URL + '/public/model3.png'"
-        alt="Car image"
-      />
+    <div class="hidden lg:block h-full p-4 w-[500px] shrink-0">
+      <div
+        class="h-full w-full flex items-center bg-white shadow border border-gray-200 rounded-3xl"
+      >
+        <img
+          class="transition-opacity animate-show w-full h-auto mb-40"
+          :src="BACKEND_URL + '/public/model3.png'"
+          alt="Car image"
+        />
+      </div>
     </div>
   </div>
 </template>

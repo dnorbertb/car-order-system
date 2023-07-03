@@ -80,7 +80,7 @@ onMounted(async () => {
   >
     <form
       v-if="!isLoading"
-      class="flex flex-col gap-y-4"
+      class="flex flex-col gap-y-4 px-3 md:px-5"
       ref="form"
       @submit.prevent="pageSubmitHandler"
       @keypress="submitFormOnEnterHit"
