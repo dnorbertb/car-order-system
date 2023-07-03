@@ -97,5 +97,5 @@ const getCookie = (name: string) => {
 
 const createProcessCookie = (id: string, timeout: number) => {
     const expirationDate = new Date(new Date().getTime() + timeout).toUTCString();
-    document.cookie = `cartId=${id};expires=${expirationDate};path=/`;
+    document.cookie = `cartId=${id};expires=${expirationDate};sameSite=strict;path=/;`;
 }

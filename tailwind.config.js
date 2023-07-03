@@ -32,6 +32,9 @@ module.exports = {
       animation: {
         show: 'show 1s ease-in-out',
       },
+      height: {
+        screen: ['100vh', '100svh'],
+      },
     },
   },
   plugins: [],

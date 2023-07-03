@@ -8,9 +8,15 @@ const route = useRoute();
 const router = useRouter();
 const cartStore = useCartStore();
 
+const deleteProcessCookie = (id: string) => {
+  const expirationDate = new Date(new Date().getTime() - 1).toUTCString();
+  document.cookie = `cartId=${id};expires=${expirationDate};sameSite=strict;path=/;`;
+};
+
 const placeOrderHandler = async (paymentSuccessful: boolean) => {
   const cartId = route.query.cart as string;
   await orderService.add(cartId, paymentSuccessful);
+  deleteProcessCookie(cartId);
   router.push({
     name: 'ThankYouView',
     query: route.query,
