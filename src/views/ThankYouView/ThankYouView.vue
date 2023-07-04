@@ -41,9 +41,9 @@ onMounted(async () => {
       class="w-full h-full bg-gray-50 flex justify-center items-center overflow-hidden"
     >
       <div
-        class="flex flex-col bg-white p-10 w-full md:h-[unset] md:max-w-[500px] md:max-h-[600px] md:rounded-xl shadow overflow-hidden"
+        class="flex flex-col bg-white p-10 w-full h-full md:h-[unset] md:max-w-[500px] md:max-h-[600px] md:rounded-xl shadow overflow-hidden"
       >
-        <h1 class="text-center text-7xl font-bold">
+        <h1 class="text-center text-4xl lg:text-7xl font-bold">
           {{
             orderData?.paymentSuccessfull
               ? 'Thank You!'
